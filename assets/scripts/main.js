@@ -1,7 +1,13 @@
 const keyList = document.querySelectorAll('.key');
 
-function playSound(audioElementId) {
-    document.querySelector(audioElementId).play();
+function playSound(selector) {
+    const element = document.querySelector(selector);
+
+    if (element && element.localName === 'audio') {
+        element.play();
+    } else {
+        console.log("Audio element not found or invalid selector.");
+    }
 }
 
 for (let i = 0; i < keyList.length; i++) {
@@ -11,5 +17,15 @@ for (let i = 0; i < keyList.length; i++) {
 
     key.onclick = function () {
         playSound(audioElementId);
+    }
+
+    key.onkeydown = function (event) {
+        if (event.code === 'Enter' || event.code === 'Space') {
+            key.classList.add('active');
+        }
+    }
+
+    key.onkeyup = function () {
+        key.classList.remove('active');
     }
 }

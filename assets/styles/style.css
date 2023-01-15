@@ -46,6 +46,7 @@ h1 {
   width: 120px;
 }
 
+.key.active,
 .key:active {
   background-color: var(--vermelha);
   border: 4px solid  var(--vermelha);
