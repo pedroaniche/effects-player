@@ -1,14 +1,15 @@
-const keyList = document.querySelectorAll('.key');
-
 function playSound(selector) {
     const element = document.querySelector(selector);
+    const validElement = element && element.localName === 'audio';
 
-    if (element && element.localName === 'audio') {
-        element.play();
-    } else {
-        console.log("Audio element not found or invalid selector.");
+    if (!validElement) {
+        return console.log("Audio element not found or invalid selector.");
     }
+    
+    element.play();
 }
+
+const keyList = document.querySelectorAll('.key');
 
 for (let i = 0; i < keyList.length; i++) {
     const key = keyList[i];
@@ -20,7 +21,9 @@ for (let i = 0; i < keyList.length; i++) {
     }
 
     key.onkeydown = function (event) {
-        if (event.code === 'Enter' || event.code === 'Space') {
+        const active = event.code === 'Enter' || event.code === 'Space';
+
+        if (active) {
             key.classList.add('active');
         }
     }
